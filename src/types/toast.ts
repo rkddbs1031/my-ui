@@ -17,6 +17,10 @@ export interface ToastOptions {
 
 export interface ToastState {
   queue: Toast[];
-  currentQueue: Toast | null;
-  addToast: () => void;
+  currentToast: Toast | null;
+  timerId: number | null;
+  addToast: (options: ToastOptions) => void;
+  removeToast: (id: string) => void;
+  processQueue: () => void;
+  clearQueue: () => void;
 }
