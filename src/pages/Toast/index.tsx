@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { cn } from '@/utils';
-import type { ToastType } from '@/types/toast';
+import type { ToastOptions, ToastType } from '@/types/toast';
 import Layout from '@/layouts/MainLayout';
 import {
   Checkbox,
@@ -21,15 +21,20 @@ const toastTypeBgMap = {
 };
 
 export default function Toast() {
-  const [title, setTitle] = useState('');
-  const [subtitle, setSubtitle] = useState('');
-  const [hasSubtitle, setHasSubtitle] = useState(true);
-  const [duration, setDuration] = useState(1000);
-  const [type, setType] = useState<ToastType>('success');
+  const [options, setOptions] = useState<ToastOptions>({
+    title: '',
+    subtitle: '',
+    duration: 1000,
+    type: 'success',
+  });
 
-  const isValid = title && (!hasSubtitle || subtitle);
+  const [hasSubtitle, setHasSubtitle] = useState(true);
+
+  const isValid = options.title && (!hasSubtitle || options.subtitle);
 
   const handleTest = () => {
+    const { title, subtitle, duration, type } = options;
+
     console.log({
       title,
       subtitle,
@@ -66,8 +71,10 @@ export default function Toast() {
               <FieldWrapper id="title" label="타이틀" required className="mb-4">
                 <TextInput
                   id="title"
-                  value={title}
-                  onChange={setTitle}
+                  value={options.title}
+                  onChange={(title) =>
+                    setOptions((prev) => ({ ...prev, title }))
+                  }
                   placeholder="Toast 타이틀을 입력하세요"
                 />
               </FieldWrapper>
@@ -78,7 +85,7 @@ export default function Toast() {
                 checked={hasSubtitle}
                 onChange={(checked) => {
                   setHasSubtitle(checked);
-                  setSubtitle('');
+                  setOptions((prev) => ({ ...prev, subtitle: '' }));
                 }}
                 className="mt-3 mb-2"
               />
@@ -86,8 +93,10 @@ export default function Toast() {
               <FieldWrapper id="title" label="서브 타이틀">
                 <TextInput
                   id="subtitle"
-                  value={subtitle}
-                  onChange={setSubtitle}
+                  value={options.subtitle}
+                  onChange={(subtitle) =>
+                    setOptions((prev) => ({ ...prev, subtitle }))
+                  }
                   placeholder="Toast 서브 타이틀을 입력하세요"
                   isDisabled={!hasSubtitle}
                 />
@@ -97,8 +106,10 @@ export default function Toast() {
             <FieldWrapper id="duration" label="지속 시간 (ms)" required>
               <NumberInput
                 id="duration"
-                value={duration}
-                onChange={setDuration}
+                value={options.duration}
+                onChange={(duration) =>
+                  setOptions((prev) => ({ ...prev, duration }))
+                }
                 step={500}
                 min={500}
                 max={10000}
@@ -114,11 +125,13 @@ export default function Toast() {
                     type="button"
                     className={cn(
                       'px-4 py-2 rounded-lg font-medium transition-colors',
-                      type === toastType
+                      options.type === toastType
                         ? toastTypeBgMap[toastType]
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     )}
-                    onClick={() => setType(toastType)}
+                    onClick={() =>
+                      setOptions((prev) => ({ ...prev, type: toastType }))
+                    }
                   >
                     {toastType}
                   </button>
@@ -146,6 +159,18 @@ export default function Toast() {
         </Card>
 
         {/* 우측: Toast 미리보기 영역 */}
+        <Card>
+          <Card.Title title="미리보기" className="mb-4" />
+
+          <div className="relative h-[500px] bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              {/* Toast가 여기에 표시될 예정 */}
+              <p className="text-gray-400 text-center">
+                Toast가 여기에 표시됩니다
+              </p>
+            </div>
+          </div>
+        </Card>
       </div>
     </Layout>
   );
