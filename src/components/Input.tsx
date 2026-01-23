@@ -101,3 +101,40 @@ interface NumberInputProps extends BaseInputProps<number> {
 export function NumberInput(props: NumberInputProps) {
   return <BaseInput type="number" {...props} />;
 }
+
+interface CheckboxProps {
+  id: string;
+  label: string;
+  checked: boolean;
+  onChange?: (checked: boolean) => void;
+  isDisabled?: boolean;
+  className?: string;
+}
+
+export function Checkbox({
+  id,
+  label,
+  checked,
+  onChange,
+  isDisabled,
+  className = '',
+}: CheckboxProps) {
+  return (
+    <div className={cn('flex items-center gap-2', className)}>
+      <input
+        type="checkbox"
+        id={id}
+        checked={checked}
+        disabled={isDisabled}
+        onChange={(e) => onChange?.(e.target.checked)}
+        className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+      />
+      <label
+        htmlFor={id}
+        className="text-sm font-medium text-gray-700 select-none"
+      >
+        {label}
+      </label>
+    </div>
+  );
+}
