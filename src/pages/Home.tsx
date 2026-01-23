@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { components } from '@/constants/components';
-import Layout from '@/layouts/layout';
+
 import Card from '@/components/Card';
+import Layout from '@/layouts/MainLayout';
 
 export default function Home() {
   return (
