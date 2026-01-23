@@ -16,13 +16,13 @@ function CardContainer({ children, className }: CardProps) {
   return <div className={cn(baseClass, className)}>{children}</div>;
 }
 
-interface BadgeProps {
+interface BadgeProps extends BaseCardProps {
   status: Status;
   label: string;
   children?: React.ReactNode;
 }
 
-function Badge({ status, label, children }: BadgeProps) {
+function Badge({ status, label, className, children }: BadgeProps) {
   const variants = {
     completed: 'bg-green-100 text-green-700',
     'in-progress': 'bg-blue-100 text-blue-700',
@@ -30,7 +30,9 @@ function Badge({ status, label, children }: BadgeProps) {
   };
 
   return (
-    <span className={cn('text-xs px-2 py-1 rounded', variants[status])}>
+    <span
+      className={cn('text-xs px-2 py-1 rounded', variants[status], className)}
+    >
       {children || label}
     </span>
   );

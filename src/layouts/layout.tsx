@@ -2,11 +2,11 @@ import type { JSX, ReactNode } from 'react';
 import { cn } from '@/utils/cn';
 
 interface BaseLayoutProps {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
 }
 
-interface HeaderProps {
+interface HeaderProps extends BaseLayoutProps {
   title: string;
   subTitle?: string;
 }
@@ -26,11 +26,14 @@ function Container({ children, className }: BaseLayoutProps) {
   );
 }
 
-function Header({ title, subTitle }: HeaderProps) {
+function Header({ title, subTitle, children, className }: HeaderProps) {
   return (
-    <header className="mb-12">
-      <h1 className="text-4xl font-bold mb-2">{title}</h1>
-      {subTitle && <p className="text-gray-600">{subTitle}</p>}
+    <header className={cn('mb-12', className)}>
+      <div>
+        <h1 className="text-4xl font-bold mb-2">{title}</h1>
+        {subTitle && <p className="text-gray-600">{subTitle}</p>}
+      </div>
+      {children}
     </header>
   );
 }
