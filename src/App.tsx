@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Home from './pages/Home';
-import Toast from './pages/Toast';
+import ToastDemo from './pages/ToastDemo';
 import Layout from './layouts/MainLayout';
 
 interface RouteConfig {
@@ -11,7 +11,7 @@ interface RouteConfig {
 
 const routes: RouteConfig[] = [
   { path: '/', element: <Home /> },
-  { path: '/toast', element: <Toast /> },
+  { path: '/toast', element: <ToastDemo /> },
 ];
 
 function App() {

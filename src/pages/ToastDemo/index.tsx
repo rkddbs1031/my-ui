@@ -20,7 +20,7 @@ export default function Toast() {
   const [options, setOptions] = useState<ToastOptions>({
     title: '',
     subtitle: '',
-    duration: 1000,
+    duration: 3000,
     type: 'success',
   });
 
