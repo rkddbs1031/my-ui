@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { toastTypeBgMap } from '@/constants/toast';
 import { cn } from '@/utils';
 import type { ToastOptions, ToastType } from '@/types/toast';
 import { useToast } from '@/hooks/useToast';
@@ -13,13 +14,6 @@ import {
 import Card from '@/components/Card';
 
 const ToastTypes: ToastType[] = ['success', 'error', 'warning', 'info'];
-
-const toastTypeBgMap = {
-  success: 'bg-green-500 text-white',
-  error: 'bg-red-500 text-white',
-  warning: 'bg-yellow-500 text-white',
-  info: 'bg-blue-500 text-white',
-};
 
 export default function Toast() {
   const [options, setOptions] = useState<ToastOptions>({
@@ -47,7 +41,7 @@ export default function Toast() {
   };
 
   return (
-    <Layout>
+    <>
       <Layout.Header
         title="Toast Demo"
         subTitle="queue 형식의 Toast UI 컴포넌트입니다."
@@ -128,7 +122,7 @@ export default function Toast() {
                     className={cn(
                       'px-4 py-2 rounded-lg font-medium transition-colors',
                       options.type === toastType
-                        ? toastTypeBgMap[toastType]
+                        ? `${toastTypeBgMap[toastType]} text-white`
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     )}
                     onClick={() =>
@@ -168,12 +162,12 @@ export default function Toast() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               {/* Toast가 여기에 표시될 예정 */}
               <p className="text-gray-400 text-center">
-                Toast가 여기에 표시됩니다
+                Toast가 여기에 표시됩니다.
               </p>
             </div>
           </div>
         </Card>
       </div>
-    </Layout>
+    </>
   );
 }
