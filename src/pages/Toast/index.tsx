@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { cn } from '@/utils';
 import type { ToastOptions, ToastType } from '@/types/toast';
+import { useToast } from '@/hooks/useToast';
 import Layout from '@/layouts/MainLayout';
 import {
   Checkbox,
@@ -32,16 +33,17 @@ export default function Toast() {
 
   const isValid = options.title && (!hasSubtitle || options.subtitle);
 
-  const handleTest = () => {
+  const toast = useToast();
+
+  const handleSubmit = () => {
     const { title, subtitle, duration, type } = options;
 
-    console.log({
+    toast.show({
       title,
       subtitle,
       duration,
       type,
     });
-    // 나중에 toast.show() 호출
   };
 
   return (
@@ -143,7 +145,7 @@ export default function Toast() {
               <p className={cn('text-base font-[500] mb-4')}> 빠른 테스트</p>
               <button
                 type="button"
-                onClick={handleTest}
+                onClick={handleSubmit}
                 disabled={!isValid}
                 className={cn(
                   'w-full px-4 py-3 text-sm font-semibold rounded-lg transition-colors',
