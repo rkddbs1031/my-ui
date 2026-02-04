@@ -6,7 +6,7 @@ import Layout from '@/layouts/MainLayout';
 
 export default function Home() {
   return (
-    <Layout>
+    <>
       <Layout.Header
         title="My UI Library"
         subTitle="재사용 가능한 React 컴포넌트 라이브러리"
@@ -30,6 +30,6 @@ export default function Home() {
           ))}
         </div>
       </Layout.Content>
-    </Layout>
+    </>
   );
 }

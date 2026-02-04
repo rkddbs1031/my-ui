@@ -1,4 +1,5 @@
 import type { JSX, ReactNode } from 'react';
+import { Outlet } from 'react-router-dom';
 import { cn } from '@/utils/cn';
 
 interface BaseLayoutProps {
@@ -18,10 +19,12 @@ interface LayoutComponent {
   Content: typeof Content;
 }
 
-function Container({ children, className }: BaseLayoutProps) {
+function Container({ className }: BaseLayoutProps) {
   return (
     <div className={cn(className, 'min-h-screen bg-gray-50')}>
-      <main className="max-w-5xl mx-auto p-8">{children}</main>
+      <main className="max-w-5xl mx-auto p-8">
+        <Outlet />
+      </main>
     </div>
   );
 }
