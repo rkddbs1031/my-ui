@@ -49,7 +49,7 @@ export default function Toast({ toast }: ToastProps) {
       >
         <div
           className={cn(
-            'flex flex-row justify-between gap-5',
+            'flex flex-row items-center justify-between gap-5',
             'pl-4 pr-3 py-2'
           )}
         >
