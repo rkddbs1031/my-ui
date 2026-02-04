@@ -33,19 +33,24 @@ export default function Toast({ toast }: ToastProps) {
   const { remove } = useToast();
 
   return (
-    <div className={cn('absolute top-1/2 left-1/2 -translate-x-1/2 z-[200]')}>
+    <div
+      id="toast"
+      className={cn(
+        'absolute top-1/2 left-1/2 -translate-x-1/2 z-[200]',
+        'w-full max-w-[20rem]'
+      )}
+    >
       <div
         className={cn(
           'transition-transform duration-500 ease-out',
-          isVisible ? 'translate-y-0' : 'translate-y-[100%]',
-          `${toastTypeBgMap[toast.type]} text-white rounded-sm z-[200] `
+          isVisible ? '-translate-y-1/2' : 'translate-y-[100%]',
+          `${toastTypeBgMap[toast.type]} text-white rounded-sm z-[200]`
         )}
       >
         <div
-          id="toast"
           className={cn(
             'flex flex-row justify-between gap-5',
-            'pl-4 pr-3 py-2 w-full max-w-[20rem]'
+            'pl-4 pr-3 py-2'
           )}
         >
           <div className={cn('flex flex-col items-start gap-1')}>
