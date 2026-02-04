@@ -12,6 +12,6 @@ export const components: ComponentInfo[] = [
     name: 'Toast',
     path: '/toast',
     description: '알림 메시지 컴포넌트',
-    status: 'in-progress',
+    status: 'completed',
   },
 ];

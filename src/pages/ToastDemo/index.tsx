@@ -13,6 +13,7 @@ import {
 } from '@/components/Input';
 import Card from '@/components/Card';
 import Toaster from '@/components/Toast/Toaster.tsx';
+import { useToastStore } from '@/store/toast';
 
 const ToastTypes: ToastType[] = ['success', 'error', 'warning', 'info'];
 
@@ -29,6 +30,7 @@ export default function Toast() {
   const isValid = options.title && (!hasSubtitle || options.subtitle);
 
   const toast = useToast();
+  const { queue, currentToast } = useToastStore();
 
   const handleSubmit = () => {
     const { title, subtitle, duration, type } = options;
@@ -49,8 +51,8 @@ export default function Toast() {
         className="flex justify-between items-start gap-3"
       >
         <Card.Badge
-          status="in-progress"
-          label="in-progress"
+          status="completed"
+          label="completed"
           className="flex-none"
         />
       </Layout.Header>
@@ -156,19 +158,34 @@ export default function Toast() {
         </Card>
 
         {/* 우측: Toast 미리보기 영역 */}
-        <Card>
-          <Card.Title title="미리보기" className="mb-4" />
+        <div className={cn('flex flex-col gap-4')}>
+          <Card>
+            <Card.Title title="미리보기" className="mb-4" />
 
-          <div className="relative h-[500px] bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              {/* Toast가 여기에 표시될 예정 */}
-              <p className="text-gray-400 text-center">
-                Toast가 여기에 표시됩니다.
-              </p>
+            <div className="relative h-[300px] bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                {/* Toast가 여기에 표시될 예정 */}
+                <p className="text-gray-400 text-center">
+                  Toast가 여기에 표시됩니다.
+                </p>
+              </div>
+              <Toaster />
             </div>
-            <Toaster />
-          </div>
-        </Card>
+          </Card>
+
+          <Card>
+            <pre className="text-gray-700 bg-white/80 rounded p-3 text-sm">
+              {JSON.stringify(
+                {
+                  currentToast,
+                  queue,
+                },
+                null,
+                2
+              )}
+            </pre>
+          </Card>
+        </div>
       </div>
     </>
   );
