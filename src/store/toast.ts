@@ -31,10 +31,26 @@ export const useToastStore = create<ToastState>((set, get) => ({
   },
 
   removeToast: (id) => {
-    set((state) => ({
-      queue: state.queue.filter((t) => t.id !== id),
-      currentToast: state.currentToast?.id === id ? null : state.currentToast,
-    }));
+    const { timerId } = get();
+
+    // 기존 타이머 중지
+    if (timerId) clearTimeout(timerId);
+
+    set((state) => {
+      const isRemovingCurrent = state.currentToast?.id === id;
+
+      return {
+        queue: state.queue.filter((t) => t.id !== id),
+        currentToast: isRemovingCurrent ? null : state.currentToast,
+        timerId: null,
+      };
+    });
+
+    // currentToast를 제거했다면 바로 다음 toast 진행
+    const { currentToast } = get();
+    if (!currentToast) {
+      get().processQueue();
+    }
   },
 
   processQueue: () => {
@@ -59,15 +75,6 @@ export const useToastStore = create<ToastState>((set, get) => ({
     set({ currentToast: nextToast, queue: restToast });
 
     const timeoutId = setTimeout(() => {
-      //   const state = get();
-
-      //   if (state.currentToast?.id === nextToast.id) {
-      //     set({ currentToast: null });
-      //     setTimeout(() => {
-      //       get().processQueue();
-      //     }, 300);
-      //   }
-
       set({ currentToast: null });
 
       // 애니메이션 여유
