@@ -12,6 +12,7 @@ import {
   TextInput,
 } from '@/components/Input';
 import Card from '@/components/Card';
+import Toaster from '@/components/Toast/Toaster.tsx';
 
 const ToastTypes: ToastType[] = ['success', 'error', 'warning', 'info'];
 
@@ -165,6 +166,7 @@ export default function Toast() {
                 Toast가 여기에 표시됩니다.
               </p>
             </div>
+            <Toaster />
           </div>
         </Card>
       </div>
