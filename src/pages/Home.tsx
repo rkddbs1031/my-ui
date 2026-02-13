@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { components } from '@/constants/components';
+import { sortedComponents } from '@/constants/components';
 
 import Layout from '@/layouts/MainLayout';
 import Card from '@/components/Card';
@@ -15,7 +15,7 @@ export default function Home() {
 
       <Layout.Content className="">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {components.map((component) => (
+          {sortedComponents.map((component) => (
             <Link key={component.path} to={component.path} className="">
               <Card>
                 <div className="flex items-start justify-end mb-4">

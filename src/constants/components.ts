@@ -14,4 +14,26 @@ export const components: ComponentInfo[] = [
     description: '알림 메시지 컴포넌트',
     status: 'completed',
   },
+  {
+    name: 'Modal',
+    path: '/modal',
+    description: 'Modal 컴포넌트',
+    status: 'planned',
+  },
+  {
+    name: 'Input',
+    path: '/input',
+    description: 'Input 컴포넌트',
+    status: 'in-progress',
+  },
 ];
+
+const statusPriority: Record<Status, number> = {
+  completed: 1,
+  'in-progress': 2,
+  planned: 3,
+};
+
+export const sortedComponents = [...components].sort((a, b) => {
+  return statusPriority[a.status] - statusPriority[b.status];
+});
