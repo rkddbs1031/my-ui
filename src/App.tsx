@@ -1,18 +1,23 @@
+import { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import { ROUTES_CONFIG } from './constants/routes';
+
 import Layout from './layouts/MainLayout';
-import { routes } from './constants/routes';
+import Loading from './components/Loading';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          {routes.map(({ path, element }) => (
-            <Route key={path} path={path} element={element} />
-          ))}
-        </Route>
-      </Routes>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route element={<Layout />}>
+            {ROUTES_CONFIG.map(({ path, element }) => (
+              <Route key={path} path={path} element={element} />
+            ))}
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

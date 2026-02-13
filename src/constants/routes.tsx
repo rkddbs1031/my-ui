@@ -1,12 +1,14 @@
-import Home from '@/pages/Home';
-import ToastDemo from '@/pages/ToastDemo';
+import { lazy, type ReactNode } from 'react';
+
+const Home = lazy(() => import('@/pages/Home'));
+const ToastDemo = lazy(() => import('@/pages/ToastDemo'));
 
 interface RouteConfig {
   path: string;
-  element: React.ReactNode;
+  element: ReactNode;
 }
 
-export const routes: RouteConfig[] = [
+export const ROUTES_CONFIG: RouteConfig[] = [
   { path: '/', element: <Home /> },
   { path: '/toast', element: <ToastDemo /> },
 ];
