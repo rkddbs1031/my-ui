@@ -4,16 +4,12 @@ import { toastTypeBgMap } from '@/constants/toast';
 import { cn } from '@/utils';
 import type { ToastOptions, ToastType } from '@/types/toast';
 import { useToast } from '@/hooks/useToast';
-import Layout from '@/layouts/MainLayout';
-import {
-  Checkbox,
-  FieldWrapper,
-  NumberInput,
-  TextInput,
-} from '@/components/Input';
-import Card from '@/components/Card';
-import Toaster from '@/components/Toast/Toaster.tsx';
 import { useToastStore } from '@/store/toast';
+
+import Layout from '@/layouts/MainLayout';
+import Card from '@/components/Card';
+import { Toaster } from '@/components/Toast';
+import { LabeledInput, CheckboxInput } from '@/components/ui/input';
 
 const ToastTypes: ToastType[] = ['success', 'error', 'warning', 'info'];
 
@@ -61,27 +57,31 @@ export default function Toast() {
         {/* 좌측: 컨트롤 패널 */}
         <Card>
           <Card.Title title="Toast 추가" className="mb-4" />
+
           <div className="flex flex-col gap-4">
             <div id="input-container">
-              <p className={cn('text-base font-medium text-gray-700 mb-3')}>
+              <span
+                className={cn('block text-base font-medium text-gray-700 mb-3')}
+              >
                 메시지
-              </p>
+              </span>
 
-              <FieldWrapper id="title" label="타이틀" required className="mb-4">
-                <TextInput
-                  id="title"
-                  value={options.title}
-                  onChange={(title) =>
-                    setOptions((prev) => ({ ...prev, title }))
-                  }
-                  placeholder="Toast 타이틀을 입력하세요"
-                />
-              </FieldWrapper>
+              <LabeledInput
+                id="title"
+                label="타이틀"
+                required
+                type="text"
+                value={options.title}
+                onChange={(e) =>
+                  setOptions((prev) => ({ ...prev, title: e.target.value }))
+                }
+                placeholder="Toast 타이틀을 입력하세요"
+              />
 
-              <Checkbox
+              <CheckboxInput
                 id="subtitle-checkbox"
                 label="서브타이틀 사용"
-                checked={hasSubtitle}
+                value={hasSubtitle}
                 onChange={(checked) => {
                   setHasSubtitle(checked);
                   setOptions((prev) => ({ ...prev, subtitle: '' }));
@@ -89,31 +89,36 @@ export default function Toast() {
                 className="mt-3 mb-2"
               />
 
-              <FieldWrapper id="title" label="서브 타이틀">
-                <TextInput
-                  id="subtitle"
-                  value={options.subtitle}
-                  onChange={(subtitle) =>
-                    setOptions((prev) => ({ ...prev, subtitle }))
-                  }
-                  placeholder="Toast 서브 타이틀을 입력하세요"
-                  isDisabled={!hasSubtitle}
-                />
-              </FieldWrapper>
+              <LabeledInput
+                id="subTitle"
+                label="서브 타이틀"
+                type="text"
+                value={options.subtitle}
+                onChange={(e) =>
+                  setOptions((prev) => ({ ...prev, subtitle: e.target.value }))
+                }
+                placeholder="Toast 서브 타이틀을 입력하세요"
+                isDisabled={!hasSubtitle}
+              />
             </div>
 
-            <FieldWrapper id="duration" label="지속 시간 (ms)" required>
-              <NumberInput
-                id="duration"
-                value={options.duration}
-                onChange={(duration) =>
-                  setOptions((prev) => ({ ...prev, duration }))
-                }
-                step={500}
-                min={500}
-                max={10000}
-              />
-            </FieldWrapper>
+            <LabeledInput
+              id="toast-duration"
+              type="number"
+              label="지속 시간 (ms)"
+              value={options.duration}
+              required
+              step={500}
+              min={500}
+              max={10000}
+              onChange={(e) => {
+                const { value } = e.target;
+                setOptions((prev) => ({
+                  ...prev,
+                  duration: value === '' ? 0 : Number(value),
+                }));
+              }}
+            />
 
             <div id="type-container">
               <p className="text-base font-medium text-gray-700 mb-3">타입</p>
