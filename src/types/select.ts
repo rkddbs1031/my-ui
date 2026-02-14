@@ -1,6 +1,8 @@
-import type { TextInputType } from '@/components/ui/input';
+import type { TextInputType } from './input';
+
+export type InputType = TextInputType | 'number';
 
 export interface SelectOption {
   label: string;
-  value: TextInputType | 'number';
+  value: InputType;
 }

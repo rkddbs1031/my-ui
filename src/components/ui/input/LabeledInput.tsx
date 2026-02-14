@@ -8,7 +8,7 @@ interface BaseLabeld {
   error?: { message: string };
 }
 
-type LabeledInputProps =
+export type LabeledInputProps =
   | (Omit<GeneralInput, 'isError'> & BaseLabeld)
   | (Omit<NumberInput, 'isError'> & BaseLabeld);
 

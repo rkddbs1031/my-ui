@@ -50,5 +50,5 @@ interface FieldErrorMessageProps {
 export function FieldErrorMessage({ message }: FieldErrorMessageProps) {
   if (!message) return null;
 
-  return <span className="text-xs text-red-500">{message}</span>;
+  return <span className="text-xs text-red-500 mt-1">{message}</span>;
 }

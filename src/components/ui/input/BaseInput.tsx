@@ -1,7 +1,7 @@
-import { cn } from '@/utils';
 import type { ChangeEvent, FocusEvent } from 'react';
 
-export type TextInputType = 'text' | 'password' | 'email' | 'tel';
+import type { TextInputType } from '@/types/input';
+import { cn } from '@/utils';
 
 export interface BaseInput {
   id: string;
