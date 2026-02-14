@@ -8,7 +8,7 @@ import { useToastStore } from '@/store/toast';
 
 import Layout from '@/layouts/MainLayout';
 import Card from '@/components/Card';
-import { Toaster } from '@/components/Toast';
+import { Toaster } from '@/components/ui/toast';
 import { LabeledInput, CheckboxInput } from '@/components/ui/input';
 
 const ToastTypes: ToastType[] = ['success', 'error', 'warning', 'info'];
