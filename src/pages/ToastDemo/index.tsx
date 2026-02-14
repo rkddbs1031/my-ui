@@ -86,7 +86,7 @@ export default function Toast() {
                   setHasSubtitle(checked);
                   setOptions((prev) => ({ ...prev, subtitle: '' }));
                 }}
-                className="mt-3 mb-2"
+                className="my-4"
               />
 
               <LabeledInput

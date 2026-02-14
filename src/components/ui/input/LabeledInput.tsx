@@ -16,7 +16,7 @@ export function LabeledInput({
   id,
   label,
   required,
-  wrapClassName = 'mb-4',
+  wrapClassName = '',
   error,
   ...rest // id, value, type, type, min, max, onChange 등
 }: LabeledInputProps) {
