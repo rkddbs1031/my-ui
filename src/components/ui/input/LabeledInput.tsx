@@ -1,5 +1,7 @@
+import type { GeneralInput, NumberInput } from '@/types/input';
+
 import { FieldWrapper } from './FieldWrapper';
-import { Input, type GeneralInput, type NumberInput } from './BaseInput';
+import { Input } from './Input';
 
 interface BaseLabeld {
   label: string;
