@@ -1,7 +1,8 @@
 import type { ChangeEvent } from 'react';
 
 import { cn } from '@/utils';
-import { Label, type BaseInput } from '.';
+import { Label } from '.';
+import type { BaseInput } from '@/types/input';
 
 interface CheckboxProps extends Omit<BaseInput, 'onChange'> {
   label: string;

@@ -1,34 +1,7 @@
-import type { ChangeEvent, FocusEvent } from 'react';
-
-import type { TextInputType } from '@/types/input';
+import type { InputProps } from '@/types/input';
 import { cn } from '@/utils';
 
-export interface BaseInput {
-  id: string;
-  isDisabled?: boolean;
-  className?: string;
-  isError?: boolean;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-}
-
-export interface GeneralInput extends BaseInput {
-  type: TextInputType;
-  value: string | number;
-}
-
-export interface NumberInput extends BaseInput {
-  type: 'number';
-  value: string | number;
-  step?: number;
-  min?: number;
-  max?: number;
-}
-
-export type InputProps = GeneralInput | NumberInput;
-
-export function Input({
+export function BaseInput({
   isDisabled = false,
   isError = false,
   className = '',
@@ -40,7 +13,7 @@ export function Input({
       className={cn(
         'w-full px-3 py-2 border rounded-lg focus:outline-none',
         isError ? 'border-red-500' : 'border-gray-300',
-        isDisabled && 'bg-gray-100 cursor-not-allowed',
+        isDisabled && 'bg-gray-100 cursor-not-allowed opacity-60',
         className
       )}
       {...rest}
