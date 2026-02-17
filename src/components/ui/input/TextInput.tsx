@@ -23,7 +23,7 @@ export default function TextInput({
         className={cn(maxLength && 'pr-20', className)}
       />
 
-      {maxLength && (
+      {!!maxLength && (
         <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none select-none flex items-center">
           <span
             className={cn(

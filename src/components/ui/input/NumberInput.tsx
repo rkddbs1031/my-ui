@@ -20,9 +20,8 @@ export default function NumberInput({
       step={step}
       onChange={onChange}
       className={cn(
-        hideSpinner && '[appearance:textfield]',
-        '[&::-webkit-outer-spin-button]:appearance-none',
-        '[&::-webkit-inner-spin-button]:appearance-none',
+        hideSpinner &&
+          '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
         props.className
       )}
     />

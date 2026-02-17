@@ -32,7 +32,7 @@ export default function PasswordInput({
       />
 
       <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-        {maxLength && (
+        {!!maxLength && (
           <span
             className={cn(
               'text-[10px] font-mono font-medium px-1.5 py-0.5 rounded-md transition-all duration-200',
