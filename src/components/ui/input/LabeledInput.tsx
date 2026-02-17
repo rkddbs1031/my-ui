@@ -1,18 +1,16 @@
-import type { GeneralInput, NumberInput } from '@/types/input';
+import type { InputProps } from '@/types/input';
 
 import { FieldWrapper } from './FieldWrapper';
 import { Input } from './Input';
 
-interface BaseLabeld {
+interface BaseLabeled {
   label: string;
   required?: boolean;
   wrapClassName?: string;
   error?: { message: string };
 }
 
-export type LabeledInputProps =
-  | (Omit<GeneralInput, 'isError'> & BaseLabeld)
-  | (Omit<NumberInput, 'isError'> & BaseLabeld);
+export type LabeledInputProps = InputProps & BaseLabeled;
 
 export function LabeledInput({
   id,
