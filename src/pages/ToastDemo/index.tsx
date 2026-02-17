@@ -178,8 +178,8 @@ export default function Toast() {
             </div>
           </Card>
 
-          <Card>
-            <pre className="text-gray-700 bg-white/80 rounded p-3 text-sm">
+          <Card className="bg-gray-900 text-gray-300 p-4 font-mono text-xs">
+            <pre>
               {JSON.stringify(
                 {
                   currentToast,
